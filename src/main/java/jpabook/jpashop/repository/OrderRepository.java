@@ -21,6 +21,13 @@ public class OrderRepository {
         return em.find(Order.class,id);
     }
 
-//    public List<Order> findAll(OrderSearch orderSearch){ }
+    public List<Order> findAllByString(OrderSearch orderSearch){ return null;}
 
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivary d",Order.class
+        ).getResultList();
+    }
 }
